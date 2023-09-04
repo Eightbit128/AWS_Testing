@@ -3,8 +3,6 @@ pipeline {
     environment {
         // Set IMAGE_TAG based on BUILD_NUMBER
         IMAGE_TAG = "${BUILD_NUMBER}"
-    }
-    environment {
         DOCKERHUB_CREDENTIALS = credentials('Docker_hub')
     }
 
