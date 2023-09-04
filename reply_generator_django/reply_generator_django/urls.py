@@ -29,4 +29,5 @@ urlpatterns = [
     path('input/', views.home_view, name='hello'),
     path('result/', views.return_result, name ='Result'),
     path('format/', views.format_result, name='Format'),
+    path('api/format/', views.format_result_api, name='format_result_api'),
 ]

@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 from .form import InputForm
 
@@ -47,7 +49,22 @@ def format_result(request):
     return HttpResponse(f"Formatted Text: {result}")
 
 
-
+@csrf_exempt #testing
+def format_result_api(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            input_text = data.get('input', '')
+            result = ""
+            for i, char in enumerate(input_text):
+                if i % 2 == 1:
+                    result += char.upper()
+                else:
+                    result += char
+            response_data = {"formatted_text": result}
+            return JsonResponse(response_data)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
 
 # def return_result(request, input):
 #     input = input[::-1]
