@@ -1,0 +1,6 @@
+version: '1'
+services:
+  my_container:
+    image: eightbit128/reply-app:v1.3
+    ports:
+      - "8000:8000"
