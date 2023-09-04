@@ -15,7 +15,7 @@ pipeline {
         stage('Copy File') {
             steps {
                 // Copy a file from the workspace to a specific location
-                sh 'cp $WORKSPACE/docker-compose.yml /home/ec2-user/app'
+                sh 'sudo -u ec2-user cp $WORKSPACE/docker-compose.yml /home/ec2-user/app'
             }
         }
 
