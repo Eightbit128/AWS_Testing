@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of URLs</title>
+</head>
+<body>
+    <h1>List of URLs</h1>
+    <ul>
+        {% for url_entry in url_data %}
+            <li><a href="{{ url_entry.url }}">{{ url_entry.tag }}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>API Test for text manipulation</h2>
+    <p>curl -X POST -H "Content-Type: application/json" -d "{\"input\": \"this is random test data\"}" http://34.201.155.23:8000/api/format/</p>
+</body>
+</html>

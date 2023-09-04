@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        // Set IMAGE_TAG based on BUILD_NUMBER
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKERHUB_CREDENTIALS = credentials('Docker_hub')
     }
@@ -30,16 +29,12 @@ pipeline {
         stage('Update Docker Compose') {
             steps {
                 script {
-                    // Define the path to your Docker Compose file
                     def composeFilePath = "$WORKSPACE/docker-compose.yml"
 
-                    // Read the Docker Compose file into a string
                     def composeFileContents = readFile(file: composeFilePath).trim()
 
-                    // Replace the existing image tag with IMAGE_TAG
                     composeFileContents = composeFileContents.replace('image: eightbit128/reply-app:latest', "image: eightbit128/reply-app:${IMAGE_TAG}")
 
-                    // Write the updated Docker Compose file back
                     writeFile(file: composeFilePath, text: composeFileContents)
                 }
             }

@@ -18,11 +18,6 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-# urlpatterns = [
-#     path('', views.hello, name='hello'),
-#     path('input/', views.home_view, name='hello'),
-#     path('result/<input>/', views.return_result, name ='Result'),
-# ]
 
 urlpatterns = [
     path('', views.hello, name='hello'),

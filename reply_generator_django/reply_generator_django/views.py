@@ -7,18 +7,13 @@ import json
 from .form import InputForm
 
 def hello(request):
-    return HttpResponse("Hello, World!")
+    url_data = [
+        {"url": "https://github.com/Eightbit128/AWS_Testing", "tag": "Github repo"},
+        {"url": "http://34.201.155.23:8080/", "tag": "Jenkins Login"},
+        {"url": "http://34.201.155.23:8000/input/", "tag": "basic input with forms"},
+    ]
 
-
-# def home_view(request):
-#     if request.method == 'POST':
-#         form = InputForm(request.POST)
-#         if form.is_valid():
-#             name = form.cleaned_data['Text_to_reverse']
-#             return HttpResponseRedirect(f'/result/{name}')
-#     else:
-#         context = {'form': InputForm()}
-#         return render(request, "home.html", context)
+    return render(request, 'urls.html', {'url_data': url_data})
 
 def home_view(request):
     if request.method == 'GET':
@@ -66,6 +61,4 @@ def format_result_api(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
-# def return_result(request, input):
-#     input = input[::-1]
-#     return HttpResponse(f"{input}")
+
