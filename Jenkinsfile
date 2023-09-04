@@ -18,14 +18,13 @@ pipeline {
                     // Use the DockerHub credentials
                     withCredentials([usernamePassword(credentialsId: 'Docker_hub', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                         // Authenticate with DockerHub
-                        echo "DOCKER_HUB_USERNAME: ${env.DOCKER_HUB_USERNAME}"
                         sh "docker login -u ${env.DOCKER_HUB_USERNAME} -p ${env.DOCKER_HUB_PASSWORD}"
 
                         // Build the Docker image using the Dockerfile
-                        sh 'docker build -t Eightbit128/reply-app:latest .'
+                        sh 'docker build -t eightbit128/reply-app:latest .'
 
                         // Push the Docker image to DockerHub
-                        sh 'docker push Eightbit128/reply-app:latest'
+                        sh 'docker push eightbit128/reply-app:latest'
                     }
                 }
             }
