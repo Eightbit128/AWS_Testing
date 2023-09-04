@@ -18,6 +18,7 @@ pipeline {
                     // Use the DockerHub credentials
                     withCredentials([usernamePassword(credentialsId: 'Docker_hub', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                         // Authenticate with DockerHub
+                        echo "DOCKER_HUB_USERNAME: ${env.DOCKER_HUB_USERNAME}"
                         sh 'docker login -u DOCKER_HUB_USERNAME -p DOCKER_HUB_PASSWORD'
 
                         // Build the Docker image using the Dockerfile
