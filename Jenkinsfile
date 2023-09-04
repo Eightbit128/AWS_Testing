@@ -13,13 +13,6 @@ pipeline {
             }
         }
 
-
-        stage('Copy File') {
-            steps {
-                sh 'sudo -u ec2-user cp $WORKSPACE/docker-compose.yml /home/ec2-user/app'
-            }
-        }
-
         stage('Build and Push Docker Image') {
             steps {
                 script {
@@ -44,11 +37,17 @@ pipeline {
                     def composeFileContents = readFile(file: composeFilePath).trim()
 
                     // Replace the existing image tag with IMAGE_TAG
-                    composeFileContents = composeFileContents.replaceFirst(/image: eightbit128\/reply-app:\d+/, "image: eightbit128/reply-app:${IMAGE_TAG}")
+                    composeFileContents = composeFileContents.replace('image: eightbit128/reply-app:latest', "image: eightbit128/reply-app:${IMAGE_TAG}")
 
                     // Write the updated Docker Compose file back
                     writeFile(file: composeFilePath, text: composeFileContents)
                 }
+            }
+        }
+
+        stage('Copy File') {
+            steps {
+                sh 'sudo -u ec2-user cp $WORKSPACE/docker-compose.yml /home/ec2-user/app'
             }
         }
     }
