@@ -12,6 +12,13 @@ pipeline {
             }
         }
 
+        stage('Copy File') {
+            steps {
+                // Copy a file from the workspace to a specific location
+                sh 'cp $WORKSPACE/docker-compose.yml /home/ec2-user/app'
+            }
+        }
+
         stage('Build and Push Docker Image') {
             steps {
                 script {
@@ -25,7 +32,6 @@ pipeline {
 
                         // Push the Docker image to DockerHub
                         sh 'docker push eightbit128/reply-app:${BUILD_NUMBER}'
-
                     }
                 }
             }
