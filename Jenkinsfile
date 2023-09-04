@@ -25,6 +25,7 @@ pipeline {
 
                         // Push the Docker image to DockerHub
                         sh 'docker push eightbit128/reply-app:${BUILD_NUMBER}'
+
                     }
                 }
             }
